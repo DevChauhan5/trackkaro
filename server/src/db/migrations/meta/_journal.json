@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1713284047112,
-      "tag": "0000_mute_northstar",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1713285181425,
-      "tag": "0001_past_giant_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1713285285075,
-      "tag": "0002_tired_caretaker",
+      "when": 1713419922290,
+      "tag": "0000_left_king_cobra",
       "breakpoints": true
     }
   ]
