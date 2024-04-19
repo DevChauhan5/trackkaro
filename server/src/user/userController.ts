@@ -102,9 +102,7 @@ export const logoutController = async (c: Context) => {
 // Delete User Controller
 export const deleteUserController = async (c: Context) => {
   try {
-    const token = getCookie(c, "token");
-    const decodedToken = await verifyToken(token as string);
-    const username = decodedToken.token;
+    const username = c.get("username");
     const userExists = await db
       .select({
         id: users.id,

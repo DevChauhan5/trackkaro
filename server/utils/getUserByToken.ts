@@ -6,9 +6,7 @@ import { users } from "../src/db/schema";
 import { eq } from "drizzle-orm";
 
 const getUserByToken = async (c: Context) => {
-  const token = getCookie(c, "token");
-  const decodedToken = await verifyToken(token as string);
-  const username = decodedToken.token;
+  const username = c.get("username");
   const user = await db
     .select({
       id: users.id,
