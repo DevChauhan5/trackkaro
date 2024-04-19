@@ -58,7 +58,7 @@ export const loginController = async (c: Context) => {
         email: user[0].email,
         createdAt: user[0].createdAt,
       },
-      201
+      200
     );
   } catch (e) {
     console.log(e);
