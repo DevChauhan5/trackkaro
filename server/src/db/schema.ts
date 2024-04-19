@@ -34,6 +34,7 @@ export const budgets = pgTable("budgets", {
   userId: uuid("user_id")
     .references(() => users.id)
     .notNull(),
+  description: text("description").notNull(),
   amount: numeric("amount").notNull(),
   period: date("period").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),

@@ -38,6 +38,12 @@ export const updateExpenseController = async (c: Context) => {
   try {
     const { id } = c.req.param();
     if (!id) return c.json({ message: "Please provide an id" }, 400);
+    const expenseExists = await db
+      .select()
+      .from(expenses)
+      .where(eq(expenses.id, id));
+    if (!expenseExists[0])
+      return c.json({ message: "Expense does not exist" }, 404);
     const { description, amount, category } = await c.req.json();
     if (!description || !amount || !category)
       return c.json({ message: "Please fill in all fields" }, 400);
