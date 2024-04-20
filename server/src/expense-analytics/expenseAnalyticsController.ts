@@ -50,7 +50,7 @@ export const expenseTrendsController = async (c: Context) => {
       return c.json({ error: "Please provide startDate and endDate" }, 400);
     const result = await db
       .select({
-        month: expenses.updatedAt,
+        month: sql`to_char(${expenses.updatedAt}, 'YYYY-MM')`,
         total_expenses: sql`sum(${expenses.amount})`,
       })
       .from(expenses)
@@ -60,16 +60,24 @@ export const expenseTrendsController = async (c: Context) => {
           between(expenses.updatedAt, new Date(startDate), new Date(endDate))
         )
       )
-      .groupBy(expenses.updatedAt);
-    console.log(result);
-
-    return c.json({ message: "Expense Trends", result }, 200);
+      .groupBy(sql`to_char(${expenses.updatedAt}, 'YYYY-MM')`);
+    return c.json(
+      {
+        message: "Expense Trends",
+        result,
+      },
+      200
+    );
   } catch (error) {
-    console.log(error);
-
     return c.json({ error: "Internal Server Error!" }, 500);
   }
 };
 
 // Expense Insights Controller
-export const expenseInsightsController = async (c: Context) => {};
+export const expenseInsightsController = async (c: Context) => {
+  try {
+    
+  } catch (error) {
+    return c.json({ error: "Internal Server Error!" }, 500);
+  }
+};
