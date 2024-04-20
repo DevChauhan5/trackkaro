@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 const Navbar = () => {
   const { theme } = useTheme();
   return (
-    <nav className="sticky backdrop-blur-md flex items-center justify-between shadow-md main-ele">
+    <nav className="sticky top-0 backdrop-blur-md flex items-center z-30 justify-between shadow-md shadow-secondary main-ele">
       {/* trackkaro logo */}
       <img
         className="max-h-16"
@@ -25,8 +25,8 @@ const Navbar = () => {
         <NavLink className={"nav-link"} to={"#pricing"}>
           Pricing
         </NavLink>
-        <NavLink className={"nav-link"} to={"#services"}>
-          Services
+        <NavLink className={"nav-link"} to={"#features"}>
+          Features
         </NavLink>
       </div>
 
