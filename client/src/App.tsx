@@ -1,11 +1,9 @@
-import { Button } from "./components/ui/button";
+import Navbar from './components/shared/Navbar';
 
 const App = () => {
   return (
     <>
-      <div>trackkaro</div>
-      <img src="/full-logo-white.webp" alt="" />
-      <Button>trackNow!</Button>
+      <Navbar />
     </>
   );
 };

@@ -62,3 +62,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .main-ele {
+    @apply px-4 md:px-8;
+  }
+  .nav-link{
+    @apply p-2 hover:border-b-2 border-primary transition-all duration-75 delay-0 ease-in;
+  }
+}
