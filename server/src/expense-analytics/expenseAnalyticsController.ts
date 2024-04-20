@@ -1,8 +1,9 @@
 import { Context } from "hono";
 import getUserByToken from "../../utils/getUserByToken";
 import { expenses } from "../db/schema";
-import { and, between, eq, sql } from "drizzle-orm";
+import { and, between, desc, eq, sql } from "drizzle-orm";
 import db from "../../config/drizzle";
+import getResponseByGemini from "../../utils/getResponseByGemini";
 
 // Expense Summary Controller
 export const expenseSummaryController = async (c: Context) => {
@@ -76,7 +77,27 @@ export const expenseTrendsController = async (c: Context) => {
 // Expense Insights Controller
 export const expenseInsightsController = async (c: Context) => {
   try {
-    
+    const user = await getUserByToken(c);
+    const tbData = await db
+      .select({
+        description: expenses.description,
+        amount: expenses.amount,
+        category: expenses.category,
+      })
+      .from(expenses)
+      .where(eq(expenses.userId, user.id));
+    const gemini = await getResponseByGemini(
+      `Provide me expense insights and sugestions for the following data and make sure that the amount is in rupees: ${JSON.stringify(
+        tbData
+      )}`
+    );
+    return c.json(
+      {
+        message: "Expense Insights",
+        insights: gemini,
+      },
+      200
+    );
   } catch (error) {
     return c.json({ error: "Internal Server Error!" }, 500);
   }
