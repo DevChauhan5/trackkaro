@@ -1,5 +1,12 @@
+import { Button } from "./components/ui/button";
+
 const App = () => {
-  return <div className="text-blue-500 bg-slate-900 h-screen">trackkaro</div>;
+  return (
+    <>
+      <div>trackkaro</div>
+      <Button>trackNow!</Button>
+    </>
+  );
 };
 
 export default App;
