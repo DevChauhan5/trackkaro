@@ -6,23 +6,13 @@ import { cn } from "@/lib/utils";
 
 const content = [
   {
-    title: "Collaborative Editing",
+    title: "Effortless Expense Tracking",
     description:
-      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
-    content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-        Collaborative Editing
-      </div>
-    ),
-  },
-  {
-    title: "Real time changes",
-    description:
-      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+      "Say goodbye to manual entries and tedious spreadsheets. Trackkaro allows you to seamlessly record your income and expenses on the go. Simply add transactions with a few taps, categorize them for easy organization, and gain a holistic view of your financial health.",
     content: (
       <div className="h-full w-full  flex items-center justify-center text-white">
         <img
-          src="/linear.webp"
+          src="https://img.freepik.com/free-vector/app-monetization-concept-illustration_114360-7404.jpg?t=st=1713687205~exp=1713690805~hmac=1ae2c0aa279c07899f9dddeabf072427e8c2dba9da40d41a3abac4dd7ebd159f&w=740"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -32,22 +22,50 @@ const content = [
     ),
   },
   {
-    title: "Version control",
+    title: "Smart Budgeting & Goal Setting",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Financial goals become achievable with Trackkaro's intuitive budgeting tools. Create custom budgets for different categories like groceries, shopping, or bills. Set realistic spending limits and receive real-time progress trackers to stay on top of your goals.",
     content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
-        Version control
+      <div className="h-full w-full  flex items-center justify-center text-white">
+        <img
+          src="https://img.freepik.com/premium-vector/budget-management-app-personal-financial-control-cash-flow-tiny-woman-manages-personal-budget_501813-276.jpg?w=740"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
       </div>
     ),
   },
   {
-    title: "Running out of content",
+    title: "Powerful Insights & Reporting",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Trackkaro goes beyond basic tracking. Gain valuable insights with clear and informative charts and graphs. Visualize your spending patterns, identify areas for improvement, and make informed financial decisions based on data-driven reports.",
     content: (
-      <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
-        Running out of content
+      <div className="h-full w-full  flex items-center justify-center text-white">
+        <img
+          src="https://img.freepik.com/free-vector/gradient-insights-illustration_23-2149322241.jpg?t=st=1713687390~exp=1713690990~hmac=78808f783f080f4e5f56bf97d1bb33e124f037d3dda6dc64f69d2cb9d70e2c85&w=740"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
+      </div>
+    ),
+  },
+  {
+    title: "Secure & Seamless Data Management",
+    description:
+      "Managing your finances requires trust. Trackkaro prioritizes your data security with robust encryption and secure cloud storage. Access your financial information anytime, anywhere, with the peace of mind that your data is protected.",
+    content: (
+      <div className="h-full w-full  flex items-center justify-center text-white">
+        <img
+          src="https://img.freepik.com/free-vector/creative-abstract-ssl-illustration_52683-79797.jpg?t=st=1713687457~exp=1713691057~hmac=de2ae22304c8e35469bd04967059fb93dffbd8ce611a6965a8bde6cc8ddc30e5&w=740"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
       </div>
     ),
   },
@@ -98,7 +116,6 @@ export const Features = () => {
       ref={ref}
       id="features"
     >
-        
       <div className="div relative flex items-start px-4 ">
         <div className="max-w-2xl">
           {content.map((item, index) => (

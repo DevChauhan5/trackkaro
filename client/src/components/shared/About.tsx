@@ -3,17 +3,17 @@ import { Button } from "../ui/button";
 
 const About = () => {
   return (
-    <section className="w-full max-w-4xl mx-auto py-12 md:py-24">
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-white dark:bg-gray-950 rounded-lg shadow-lg overflow-hidden">
+    <section id="about" className="w-full max-w-4xl mx-auto py-12 md:py-24 main-ele">
+      <div className="grid md:grid-cols-2 gap-16">
+        <div className="bg-white dark:bg-gray-950 rounded-lg shadow-lg overflow-hidden border">
           <img
             alt="About"
             className="w-full h-[300px] object-cover"
             height={400}
-            src="/placeholder.svg"
+            src="https://img.freepik.com/premium-vector/business-making-concept-with-people-scene-flat-design-web-woman-planning-strategy-analysis-graph-making-tasks-calendar-vector-illustration-social-media-banner-marketing-material_9209-13006.jpg?w=740"
             style={{
               aspectRatio: "600/400",
-              objectFit: "cover",
+              objectFit: "contain",
             }}
             width={600}
           />
@@ -27,7 +27,7 @@ const About = () => {
             right track with Trackkaro and experience a smarter way to manage
             your finances.
           </p>
-          <Button className="-" size={"lg"} asChild>
+          <Button className="mt-8" size={"lg"} asChild>
             <Link to={"sign-up"}>Get Started</Link>
           </Button>
         </div>

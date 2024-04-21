@@ -2,35 +2,43 @@ import { Button } from "@/components/ui/button";
 
 export default function Component() {
   return (
-    <section className="w-full max-w-4xl mx-auto py-12 md:py-24">
+    <section
+      id="features"
+      className="w-full max-w-4xl mx-auto py-12 md:py-24 main-ele"
+    >
+      <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">Pricing</h1>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="bg-white dark:bg-gray-950 rounded-lg shadow-lg border overflow-hidden">
           <div className="px-6 py-8">
             <h3 className="text-2xl font-bold mb-2">Starter</h3>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Perfect for individuals and small teams.
+              Track expenses, manage budgets, securely. Basic features included.
             </p>
             <div className="flex items-baseline mb-6">
-              <span className="text-4xl font-bold">$9</span>
-              <span className="text-gray-500 dark:text-gray-400 text-sm">
-                /month
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary  to-pink-500 text-4xl font-bold uppercase">
+                Free
               </span>
             </div>
             <ul className="space-y-2 mb-8">
               <li className="flex items-center">
-                <CheckIcon className="w-5 h-5 mr-2 text-primary" />5 projects
+                <CheckIcon className="w-5 h-5 mr-2 text-primary" />
+                Track your expenses
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                Unlimited users
+                Categorize your transactions
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                5GB storage
+                Set budgets
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                Basic analytics
+                Mobile App access
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="w-5 h-5 mr-2 text-primary" />
+                Visualize your spendings
               </li>
             </ul>
             <Button className="w-full">Select Plan</Button>
@@ -40,10 +48,13 @@ export default function Component() {
           <div className="px-6 py-8">
             <h3 className="text-2xl font-bold mb-2">Pro</h3>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
-              Ideal for growing teams and businesses.
+              Unlock personalized insights, monthly summaries. Premium features
+              for ₹199/mo.
             </p>
             <div className="flex items-baseline mb-6">
-              <span className="text-4xl font-bold">$49</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary  to-pink-500 text-4xl font-bold">
+                ₹199
+              </span>
               <span className="text-gray-500 dark:text-gray-400 text-sm">
                 /month
               </span>
@@ -51,19 +62,23 @@ export default function Component() {
             <ul className="space-y-2 mb-8">
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                Unlimited projects
+                All Starter features
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                Unlimited users
+                Monthly summary delivered to mailbox
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                100GB storage
+                Customizable budget alerts
               </li>
               <li className="flex items-center">
                 <CheckIcon className="w-5 h-5 mr-2 text-primary" />
-                Advanced analytics
+                Priority customer support
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="w-5 h-5 mr-2 text-primary" />
+                Access to premium analytics
               </li>
             </ul>
             <Button className="w-full">Select Plan</Button>
