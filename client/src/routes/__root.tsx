@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/sonner";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
 import React, { Suspense } from "react";
 
@@ -17,6 +18,7 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <Outlet />
+      <Toaster />
       <Suspense>
         <TanStackRouterDevtools />
       </Suspense>

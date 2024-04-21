@@ -34,10 +34,10 @@ const Navbar = () => {
       {/* Sign-in and Get-Started Buttons */}
       <div className="hidden md:flex items-center gap-x-4">
         <Button className="" asChild variant={"outline"}>
-          <Link to="/">Sign In</Link>
+          <Link to="/sign-in">Sign In</Link>
         </Button>
         <Button className="" asChild>
-          <Link to={"/"}>Get Started</Link>
+          <Link to="/sign-up">Get Started</Link>
         </Button>
         <ThemeToggle />
       </div>
