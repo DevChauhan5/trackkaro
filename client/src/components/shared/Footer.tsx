@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
+import { Link } from "@tanstack/react-router";
 
-export default function footer() {
+export default function Footer() {
   return (
     <footer className="flex flex-col gap-4 py-8 px-4 sm:flex-row sm:items-center sm:justify-between ">
       <div className="flex items-center gap-2">

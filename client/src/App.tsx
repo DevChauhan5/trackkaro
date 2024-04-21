@@ -1,21 +1,31 @@
-import About from "./components/shared/About";
-import { Features } from "./components/shared/Features";
-import Footer from "./components/shared/Footer";
-import Hero from "./components/shared/Hero";
-import Navbar from "./components/shared/Navbar";
-import Pricing from "./components/shared/Pricing";
+import { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import "./index.css";
 
-const App = () => {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Pricing />
-      <Features />
-      <Footer />
-    </>
+// Import the generated route tree
+import { routeTree } from "./routeTree.gen";
+import { ThemeProvider } from "./components/theme-provider";
+
+// Create a new router instance
+const router = createRouter({ routeTree });
+
+// Register the router instance for type safety
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+// Render the app
+const rootElement = document.getElementById("app")!;
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </StrictMode>
   );
-};
-
-export default App;
+}

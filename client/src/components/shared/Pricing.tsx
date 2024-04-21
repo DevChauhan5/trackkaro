@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 
-export default function Component() {
+export default function Pricing() {
   return (
     <section
-      id="features"
+      id="pricing"
       className="w-full max-w-4xl mx-auto py-12 md:py-24 main-ele"
     >
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-12">Pricing</h1>

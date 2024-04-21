@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+
 import { useTheme } from "../theme-provider";
 import { ThemeToggle } from "./theme-toggle";
 import { MenuIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import { Link } from "@tanstack/react-router";
 
 const Navbar = () => {
   const { theme } = useTheme();
@@ -19,24 +20,24 @@ const Navbar = () => {
 
       {/* navbar links */}
       <div className="hidden md:flex items-center gap-x-4">
-        <NavLink className={"nav-link"} to={"#about"}>
+        <Link className={"nav-link"} to="#about">
           About
-        </NavLink>
-        <NavLink className={"nav-link"} to={"#pricing"}>
+        </Link>
+        <Link className={"nav-link"} to={"#pricing"}>
           Pricing
-        </NavLink>
-        <NavLink className={"nav-link"} to={"#features"}>
+        </Link>
+        <Link className={"nav-link"} to={"#features"}>
           Features
-        </NavLink>
+        </Link>
       </div>
 
       {/* Sign-in and Get-Started Buttons */}
       <div className="hidden md:flex items-center gap-x-4">
         <Button className="" asChild variant={"outline"}>
-          <NavLink to={"/sign-in"}>Sign In</NavLink>
+          <Link to="/">Sign In</Link>
         </Button>
         <Button className="" asChild>
-          <NavLink to={"/sign-up"}>Get Started</NavLink>
+          <Link to={"/"}>Get Started</Link>
         </Button>
         <ThemeToggle />
       </div>
