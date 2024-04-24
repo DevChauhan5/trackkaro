@@ -1,6 +1,7 @@
+import React, { Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import React, { Suspense } from "react";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const TanStackRouterDevtools =
   import.meta.env.NODE_ENV === "production"
@@ -20,6 +21,7 @@ export const Route = createRootRoute({
       <Outlet />
       <Toaster />
       <Suspense>
+        <ReactQueryDevtools />
         <TanStackRouterDevtools />
       </Suspense>
     </>

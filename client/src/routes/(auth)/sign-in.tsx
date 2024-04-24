@@ -6,6 +6,11 @@ import { z } from "zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import Loading from "@/components/Loading";
+import { useBoolean } from "usehooks-ts";
+import { useNavigate } from "@tanstack/react-router";
+import axios from "axios";
+import useAuth from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/(auth)/sign-in")({
   component: SignIn,
@@ -23,6 +28,9 @@ const formSchema = z.object({
 const url = `${import.meta.env.VITE_TRACKKARO_BASE_URL}/user/login`
 
 function SignIn() {
+  const navigate = useNavigate();
+  const {register} = useAuth()
+  const { value, setTrue, setFalse } = useBoolean(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,23 +39,24 @@ function SignIn() {
     },
   })
  
-  async function  onSubmit(values: z.infer<typeof formSchema>) {
-    
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values), 
-    });
-    if (response.ok) {
-      const data = await response.json();
-      toast.success(data.message)
-      // redirect to dashboard
-    } else{
-      const data = await response.json();
-      toast.error(data.message);
-    }
+ function  onSubmit(values: z.infer<typeof formSchema>) {
+    setTrue();
+    axios
+      .post(url, values)
+      .then(function (response) {
+        register(response.data)
+        if(response.status === 200){
+          toast.success("Logged in successfully!");
+        }
+        navigate({
+          to: '/dashboard',
+        })
+        setFalse();
+      })
+      .catch(function (error) {
+        toast.error(error.response.data.message);
+        setFalse();
+      });
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gray-50 py-12 dark:bg-gray-900 main-ele">
@@ -97,7 +106,13 @@ function SignIn() {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">Login</Button>
+        <Button className="w-full" type="submit">
+        {value ? (
+                <Loading text={"Signing in..."} />
+              ) : (
+                "Sign In"
+              )}
+        </Button>
       </form>
     </Form>
       </div>

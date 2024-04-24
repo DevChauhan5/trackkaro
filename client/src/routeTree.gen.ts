@@ -13,8 +13,10 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ProtectedDashboardlayoutImport } from './routes/_protected/_dashboardlayout'
 import { Route as authSignUpImport } from './routes/(auth)/sign-up'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
+import { Route as ProtectedDashboardlayoutDashboardImport } from './routes/_protected/_dashboardlayout.dashboard'
 
 // Create Virtual Routes
 
@@ -27,6 +29,11 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
+const ProtectedDashboardlayoutRoute = ProtectedDashboardlayoutImport.update({
+  id: '/_protected/_dashboardlayout',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const authSignUpRoute = authSignUpImport.update({
   path: '/sign-up',
   getParentRoute: () => rootRoute,
@@ -36,6 +43,12 @@ const authSignInRoute = authSignInImport.update({
   path: '/sign-in',
   getParentRoute: () => rootRoute,
 } as any)
+
+const ProtectedDashboardlayoutDashboardRoute =
+  ProtectedDashboardlayoutDashboardImport.update({
+    path: '/dashboard',
+    getParentRoute: () => ProtectedDashboardlayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -53,6 +66,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignUpImport
       parentRoute: typeof rootRoute
     }
+    '/_protected/_dashboardlayout': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutImport
+      parentRoute: typeof rootRoute
+    }
+    '/_protected/_dashboardlayout/dashboard': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutDashboardImport
+      parentRoute: typeof ProtectedDashboardlayoutImport
+    }
   }
 }
 
@@ -62,6 +83,9 @@ export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
   authSignInRoute,
   authSignUpRoute,
+  ProtectedDashboardlayoutRoute.addChildren([
+    ProtectedDashboardlayoutDashboardRoute,
+  ]),
 ])
 
 /* prettier-ignore-end */
