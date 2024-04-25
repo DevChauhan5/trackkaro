@@ -12,7 +12,9 @@ const useAuth = () => {
   };
 
   const getUser = () => {
-    return user;
+    if(user){
+      return user;
+    }
   };
 
   const logout = () => {
