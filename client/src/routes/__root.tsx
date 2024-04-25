@@ -21,8 +21,8 @@ export const Route = createRootRoute({
       <Outlet />
       <Toaster />
       <Suspense>
-        <ReactQueryDevtools />
-        <TanStackRouterDevtools />
+        {/* <ReactQueryDevtools />
+        <TanStackRouterDevtools /> */}
       </Suspense>
     </>
   ),

@@ -1,3 +1,4 @@
+import DashboardSidebar from "@/components/shared/DashboardSidebar";
 import { Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_protected/_dashboardlayout")({
@@ -6,8 +7,8 @@ export const Route = createFileRoute("/_protected/_dashboardlayout")({
 
 function DashboardLayout() {
   return (
-    <div>
-      <h1>Dashboard Layout</h1>
+    <div className="flex">
+      <DashboardSidebar />
       <Outlet />
     </div>
   );

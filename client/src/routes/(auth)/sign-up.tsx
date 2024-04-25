@@ -13,10 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import axios from "axios";
 import { useBoolean } from "usehooks-ts";
 import Loading from "@/components/Loading";
 import { useNavigate } from "@tanstack/react-router";
+import { makeRequest } from "@/lib/axios";
 
 export const Route = createFileRoute("/(auth)/sign-up")({
   component: SignUp,
@@ -48,7 +48,7 @@ function SignUp() {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     setTrue();
-    axios
+    makeRequest
       .post(url, values)
       .then(function (response) {
         if (response.status === 201) {
@@ -62,11 +62,7 @@ function SignUp() {
         setFalse();
       })
       .catch(function (error) {
-        if (error.response.status === 400) {
-          toast.error(error.response.data.message);
-        } else {
-          toast.error("Something went wrong! Please try again later.");
-        }
+          toast.error(error.message)
         setFalse();
       });
   }

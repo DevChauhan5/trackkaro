@@ -16,7 +16,11 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ProtectedDashboardlayoutImport } from './routes/_protected/_dashboardlayout'
 import { Route as authSignUpImport } from './routes/(auth)/sign-up'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
+import { Route as ProtectedDashboardlayoutTransactionsImport } from './routes/_protected/_dashboardlayout.transactions'
+import { Route as ProtectedDashboardlayoutSettingsImport } from './routes/_protected/_dashboardlayout.settings'
 import { Route as ProtectedDashboardlayoutDashboardImport } from './routes/_protected/_dashboardlayout.dashboard'
+import { Route as ProtectedDashboardlayoutBudgetImport } from './routes/_protected/_dashboardlayout.budget'
+import { Route as ProtectedDashboardlayoutAnalyticsImport } from './routes/_protected/_dashboardlayout.analytics'
 
 // Create Virtual Routes
 
@@ -44,9 +48,33 @@ const authSignInRoute = authSignInImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProtectedDashboardlayoutTransactionsRoute =
+  ProtectedDashboardlayoutTransactionsImport.update({
+    path: '/transactions',
+    getParentRoute: () => ProtectedDashboardlayoutRoute,
+  } as any)
+
+const ProtectedDashboardlayoutSettingsRoute =
+  ProtectedDashboardlayoutSettingsImport.update({
+    path: '/settings',
+    getParentRoute: () => ProtectedDashboardlayoutRoute,
+  } as any)
+
 const ProtectedDashboardlayoutDashboardRoute =
   ProtectedDashboardlayoutDashboardImport.update({
     path: '/dashboard',
+    getParentRoute: () => ProtectedDashboardlayoutRoute,
+  } as any)
+
+const ProtectedDashboardlayoutBudgetRoute =
+  ProtectedDashboardlayoutBudgetImport.update({
+    path: '/budget',
+    getParentRoute: () => ProtectedDashboardlayoutRoute,
+  } as any)
+
+const ProtectedDashboardlayoutAnalyticsRoute =
+  ProtectedDashboardlayoutAnalyticsImport.update({
+    path: '/analytics',
     getParentRoute: () => ProtectedDashboardlayoutRoute,
   } as any)
 
@@ -70,8 +98,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedDashboardlayoutImport
       parentRoute: typeof rootRoute
     }
+    '/_protected/_dashboardlayout/analytics': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutAnalyticsImport
+      parentRoute: typeof ProtectedDashboardlayoutImport
+    }
+    '/_protected/_dashboardlayout/budget': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutBudgetImport
+      parentRoute: typeof ProtectedDashboardlayoutImport
+    }
     '/_protected/_dashboardlayout/dashboard': {
       preLoaderRoute: typeof ProtectedDashboardlayoutDashboardImport
+      parentRoute: typeof ProtectedDashboardlayoutImport
+    }
+    '/_protected/_dashboardlayout/settings': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutSettingsImport
+      parentRoute: typeof ProtectedDashboardlayoutImport
+    }
+    '/_protected/_dashboardlayout/transactions': {
+      preLoaderRoute: typeof ProtectedDashboardlayoutTransactionsImport
       parentRoute: typeof ProtectedDashboardlayoutImport
     }
   }
@@ -84,7 +128,11 @@ export const routeTree = rootRoute.addChildren([
   authSignInRoute,
   authSignUpRoute,
   ProtectedDashboardlayoutRoute.addChildren([
+    ProtectedDashboardlayoutAnalyticsRoute,
+    ProtectedDashboardlayoutBudgetRoute,
     ProtectedDashboardlayoutDashboardRoute,
+    ProtectedDashboardlayoutSettingsRoute,
+    ProtectedDashboardlayoutTransactionsRoute,
   ]),
 ])
 
