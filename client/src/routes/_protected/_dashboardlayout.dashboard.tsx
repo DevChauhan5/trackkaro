@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import DashboardButtons from "@/components/shared/DashboardButtons";
-import DashboardCards from "@/components/shared/DashboardCards";
+import DashboardButtons from "@/components/shared/DashboardComponents/DashboardButtons";
+import DashboardCards from "@/components/shared/DashboardComponents/DashboardCards";
 import TransactionHistoryBox from "@/components/shared/TransactionHistoryBox";
-import DataOverviewChart from "@/components/shared/DataOverviewChart";
+import DataOverviewChart from "@/components/shared/DashboardComponents/DataOverviewChart";
 import useAuth from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/_protected/_dashboardlayout/dashboard")({

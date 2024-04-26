@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { useTheme } from "../theme-provider";
-import { Separator } from "../ui/separator";
+import { useTheme } from "../../theme-provider";
+import { Separator } from "../../ui/separator";
 import { LogOutIcon, SettingsIcon } from "lucide-react";
 import { sidebarItems } from "@/constants/index";
 import useAuth from "@/hooks/useAuth";

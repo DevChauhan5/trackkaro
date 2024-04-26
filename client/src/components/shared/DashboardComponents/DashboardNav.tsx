@@ -1,8 +1,8 @@
 import { Input } from "@/components/ui/input";
 import { BellIcon, SearchIcon } from "lucide-react";
-import { Separator } from "../ui/separator";
-import { UserAvatar } from "./UserAvatar";
-import { useTheme } from "../theme-provider";
+import { Separator } from "../../ui/separator";
+import { UserAvatar } from "../UserAvatar";
+import { useTheme } from "../../theme-provider";
 
 const DashboardNav = () => {
   const { theme } = useTheme();

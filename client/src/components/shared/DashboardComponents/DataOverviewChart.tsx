@@ -1,12 +1,12 @@
 import { Area, AreaChart, Tooltip, XAxis } from "recharts";
-import { Separator } from "../ui/separator";
+import { Separator } from "../../ui/separator";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+} from "../../ui/dropdown-menu";
+import { Button } from "../../ui/button";
 import { ChevronDownIcon } from "lucide-react";
 // import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 

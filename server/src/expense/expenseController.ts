@@ -79,7 +79,11 @@ export const deleteExpenseController = async (c: Context) => {
 // Get Expense Controller
 export const getExpenseController = async (c: Context) => {
   try {
-    const allExpenses = await db.select().from(expenses);
+    const user = await getUserByToken(c);
+    const allExpenses = await db
+      .select()
+      .from(expenses)
+      .where(eq(expenses.userId, user.id));
     return c.json(allExpenses, 200);
   } catch (error) {
     return c.json({ message: "Internal Server Error" }, 500);

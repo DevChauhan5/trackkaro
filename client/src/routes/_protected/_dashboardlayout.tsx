@@ -1,5 +1,6 @@
-import DashboardNav from "@/components/shared/DashboardNav";
-import DashboardSidebar from "@/components/shared/DashboardSidebar";
+
+import DashboardNav from "@/components/shared/DashboardComponents/DashboardNav";
+import DashboardSidebar from "@/components/shared/DashboardComponents/DashboardSidebar";
 import useAuth from "@/hooks/useAuth";
 import { Outlet, createFileRoute, useNavigate } from "@tanstack/react-router";
 
