@@ -2,6 +2,7 @@ import { MinusIcon, PlusIcon, WalletMinimal } from "lucide-react";
 import { Button } from "../ui/button";
 
 const DashboardButtons = () => {
+  
   return (
     <div className="mt-6 h-fit border flex items-center justify-center w-full py-10 rounded-md space-x-8">
       <Button className="flex-col items-center gap-2 p-2" variant={"nil"}>

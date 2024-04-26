@@ -8,7 +8,10 @@ import expenseAnalytics from "./expense-analytics/expenseAnalyticsRoutes";
 
 const app = new Hono().basePath("/api/v1");
 
-app.use('/*', cors())
+app.use('/*', cors({
+  origin: 'https://solid-space-journey-pv5797r4g7vf75p4-5173.app.github.dev',
+  credentials: true,
+}))
 app.use("/expense/*", authMiddleware);
 app.use("/budget/*", authMiddleware);
 app.use("/expense-analytics/*", authMiddleware);

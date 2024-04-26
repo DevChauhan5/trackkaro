@@ -7,9 +7,10 @@ import "./index.css";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { ThemeProvider } from "./components/theme-provider";
+import AuthProvider from "./lib/AuthProvider";
 
 // Create a new router instance
-const router = createRouter({ routeTree});
+const router = createRouter({ routeTree });
 const queryClient = new QueryClient();
 
 // Register the router instance for type safety
@@ -25,11 +26,13 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        </QueryClientProvider>
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+          </QueryClientProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </StrictMode>
   );
 }

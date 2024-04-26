@@ -1,12 +1,14 @@
-
 import { useTheme } from "../theme-provider";
 import { ThemeToggle } from "./theme-toggle";
 import { MenuIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link } from "@tanstack/react-router";
+import { useContext } from "react";
+import AuthContext from "@/context/authContext";
 
 const Navbar = () => {
   const { theme } = useTheme();
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <nav className="sticky top-0 backdrop-blur-md flex items-center z-30 justify-between shadow-md shadow-secondary main-ele">
       {/* trackkaro logo */}
@@ -33,12 +35,20 @@ const Navbar = () => {
 
       {/* Sign-in and Get-Started Buttons */}
       <div className="hidden md:flex items-center gap-x-4">
-        <Button className="" asChild variant={"outline"}>
-          <Link to="/sign-in">Sign In</Link>
-        </Button>
-        <Button className="" asChild>
-          <Link to="/sign-up">Get Started</Link>
-        </Button>
+        {isAuthenticated ? (
+          <Button className="" asChild variant={"outline"}>
+            <Link to="/dashboard">Dashboard</Link>
+          </Button>
+        ) : (
+          <>
+            <Button className="" asChild variant={"outline"}>
+              <Link to="/sign-in">Sign In</Link>
+            </Button>
+            <Button className="" asChild>
+              <Link to="/sign-up">Get Started</Link>
+            </Button>
+          </>
+        )}
         <ThemeToggle />
       </div>
 

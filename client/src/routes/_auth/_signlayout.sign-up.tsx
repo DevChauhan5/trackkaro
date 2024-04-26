@@ -13,53 +13,56 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import Loading from "@/components/Loading";
 import { useBoolean } from "usehooks-ts";
+import Loading from "@/components/Loading";
 import { useNavigate } from "@tanstack/react-router";
-import useAuth from "@/hooks/useAuth";
 import { makeRequest } from "@/lib/axios";
 
-export const Route = createFileRoute("/(auth)/sign-in")({
-  component: SignIn,
+export const Route = createFileRoute("/_auth/_signlayout/sign-up")({
+  component: SignUp,
 });
 
 const formSchema = z.object({
   username: z.string().min(3, {
     message: "Username must be at least 3 characters.",
   }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
 });
+const url = `${import.meta.env.VITE_TRACKKARO_BASE_URL}/user/register`;
 
-function SignIn() {
+function SignUp() {
   const navigate = useNavigate();
-  const { register } = useAuth();
   const { value, setTrue, setFalse } = useBoolean(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      email: "",
       password: "",
     },
   });
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     setTrue();
     makeRequest
-      .post("/user/login", values)
+      .post(url, values)
       .then(function (response) {
-        register(response.data);
-        if (response.status === 200) {
-          toast.success("Logged in successfully!");
+        if (response.status === 201) {
+          toast.success(
+            "Account created successfully! Please login to continue."
+          );
         }
         navigate({
-          to: "/dashboard",
-        });
+          to: '/sign-in',
+        })
         setFalse();
       })
       .catch(function (error) {
-        toast.error(error.message);
+          toast.error(error.message)
         setFalse();
       });
   }
@@ -69,7 +72,7 @@ function SignIn() {
         <div className="text-center">
           <div className="flex items-center justify-center gap-x-4">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-              Login to your account
+              Create an account
             </h1>
             <img
               src="/logo-light.webp"
@@ -78,12 +81,12 @@ function SignIn() {
             />
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Don't have an account?{" "}
+            Already have an account?
             <Link
               className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-500 dark:hover:text-indigo-400 ml-2"
-              to="/sign-up"
+              to="/sign-in"
             >
-              Sign up
+              Sign in
             </Link>
           </p>
         </div>
@@ -97,6 +100,19 @@ function SignIn() {
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input placeholder="Choose a Username" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter Your Email!" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -119,12 +135,17 @@ function SignIn() {
                 </FormItem>
               )}
             />
-            <Button className={`w-full ${value ? "pointer-events-none opacity-50": null}`} type="submit">
-              {value ? <Loading text={"Signing in..."} /> : "Sign In"}
+
+            <Button className="w-full" type="submit">
+              {value ? (
+                <Loading text={"Creating Account..."} />
+              ) : (
+                "Create Account"
+              )}
             </Button>
           </form>
         </Form>
       </div>
     </main>
-  );
+  )
 }

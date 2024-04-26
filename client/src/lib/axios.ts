@@ -1,7 +1,8 @@
 import axios from "axios"
 
 export const makeRequest = axios.create({
-  baseURL: `${import.meta.env.VITE_TRACKKARO_BASE_URL}`
+  baseURL: `${import.meta.env.VITE_TRACKKARO_BASE_URL}`,
+  withCredentials: true,
 })
 
 makeRequest.interceptors.response.use(

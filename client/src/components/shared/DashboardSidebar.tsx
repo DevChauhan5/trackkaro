@@ -1,20 +1,44 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useTheme } from "../theme-provider";
 import { Separator } from "../ui/separator";
 import { LogOutIcon, SettingsIcon } from "lucide-react";
 import { sidebarItems } from "@/constants/index";
+import useAuth from "@/hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { makeRequest } from "@/lib/axios";
+import { toast } from "sonner";
 const DashboardSidebar = () => {
   const { theme } = useTheme();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return makeRequest.post("/user/logout");
+    },
+    onError(error) {
+      toast.error(error.message);
+    },
+    onSuccess(data) {
+      logout();
+      toast.success(data.data.message);
+      navigate({
+        to: "/sign-up",
+      });
+    },
+  });
   return (
     <aside className="relative overflow-hidden hidden lg:flex h-screen w-1/6 border-r p-4 flex-col items-start">
       {/* logo */}
-      <img
-        className="max-h-16"
-        src={`${
-          theme === "dark" ? "full-logo-dark.webp" : "full-logo-light.webp"
-        }`}
-        alt="trackkaro"
-      />
+      <Link to="/">
+        <img
+          className="max-h-16"
+          src={`${
+            theme === "dark" ? "full-logo-dark.webp" : "full-logo-light.webp"
+          }`}
+          alt="trackkaro"
+        />
+      </Link>
 
       {/* sidebar items */}
       <div className="flex flex-col items-start gap-2 w-full mt-6">
@@ -50,7 +74,7 @@ const DashboardSidebar = () => {
           <SettingsIcon />
           Settings
         </Link>
-        <button className="sidebar-item">
+        <button onClick={() => mutation.mutate()} className="sidebar-item">
           <LogOutIcon /> Logout
         </button>
       </div>

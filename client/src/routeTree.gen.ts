@@ -14,13 +14,14 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as ProtectedDashboardlayoutImport } from './routes/_protected/_dashboardlayout'
-import { Route as authSignUpImport } from './routes/(auth)/sign-up'
-import { Route as authSignInImport } from './routes/(auth)/sign-in'
+import { Route as AuthSignlayoutImport } from './routes/_auth/_signlayout'
 import { Route as ProtectedDashboardlayoutTransactionsImport } from './routes/_protected/_dashboardlayout.transactions'
 import { Route as ProtectedDashboardlayoutSettingsImport } from './routes/_protected/_dashboardlayout.settings'
 import { Route as ProtectedDashboardlayoutDashboardImport } from './routes/_protected/_dashboardlayout.dashboard'
 import { Route as ProtectedDashboardlayoutBudgetImport } from './routes/_protected/_dashboardlayout.budget'
 import { Route as ProtectedDashboardlayoutAnalyticsImport } from './routes/_protected/_dashboardlayout.analytics'
+import { Route as AuthSignlayoutSignUpImport } from './routes/_auth/_signlayout.sign-up'
+import { Route as AuthSignlayoutSignInImport } from './routes/_auth/_signlayout.sign-in'
 
 // Create Virtual Routes
 
@@ -38,13 +39,8 @@ const ProtectedDashboardlayoutRoute = ProtectedDashboardlayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const authSignUpRoute = authSignUpImport.update({
-  path: '/sign-up',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const authSignInRoute = authSignInImport.update({
-  path: '/sign-in',
+const AuthSignlayoutRoute = AuthSignlayoutImport.update({
+  id: '/_auth/_signlayout',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -78,6 +74,16 @@ const ProtectedDashboardlayoutAnalyticsRoute =
     getParentRoute: () => ProtectedDashboardlayoutRoute,
   } as any)
 
+const AuthSignlayoutSignUpRoute = AuthSignlayoutSignUpImport.update({
+  path: '/sign-up',
+  getParentRoute: () => AuthSignlayoutRoute,
+} as any)
+
+const AuthSignlayoutSignInRoute = AuthSignlayoutSignInImport.update({
+  path: '/sign-in',
+  getParentRoute: () => AuthSignlayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -86,17 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/(auth)/sign-in': {
-      preLoaderRoute: typeof authSignInImport
-      parentRoute: typeof rootRoute
-    }
-    '/(auth)/sign-up': {
-      preLoaderRoute: typeof authSignUpImport
+    '/_auth/_signlayout': {
+      preLoaderRoute: typeof AuthSignlayoutImport
       parentRoute: typeof rootRoute
     }
     '/_protected/_dashboardlayout': {
       preLoaderRoute: typeof ProtectedDashboardlayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_auth/_signlayout/sign-in': {
+      preLoaderRoute: typeof AuthSignlayoutSignInImport
+      parentRoute: typeof AuthSignlayoutImport
+    }
+    '/_auth/_signlayout/sign-up': {
+      preLoaderRoute: typeof AuthSignlayoutSignUpImport
+      parentRoute: typeof AuthSignlayoutImport
     }
     '/_protected/_dashboardlayout/analytics': {
       preLoaderRoute: typeof ProtectedDashboardlayoutAnalyticsImport
@@ -125,8 +135,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
-  authSignInRoute,
-  authSignUpRoute,
+  AuthSignlayoutRoute.addChildren([
+    AuthSignlayoutSignInRoute,
+    AuthSignlayoutSignUpRoute,
+  ]),
   ProtectedDashboardlayoutRoute.addChildren([
     ProtectedDashboardlayoutAnalyticsRoute,
     ProtectedDashboardlayoutBudgetRoute,

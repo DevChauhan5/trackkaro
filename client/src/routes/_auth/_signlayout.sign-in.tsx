@@ -13,56 +13,59 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { useBoolean } from "usehooks-ts";
 import Loading from "@/components/Loading";
+import { useBoolean } from "usehooks-ts";
 import { useNavigate } from "@tanstack/react-router";
+import useAuth from "@/hooks/useAuth";
 import { makeRequest } from "@/lib/axios";
+import { useContext } from "react";
+import AuthContext from "@/context/authContext";
 
-export const Route = createFileRoute("/(auth)/sign-up")({
-  component: SignUp,
+export const Route = createFileRoute("/_auth/_signlayout/sign-in")({
+  component: SignIn,
 });
 
 const formSchema = z.object({
   username: z.string().min(3, {
     message: "Username must be at least 3 characters.",
   }),
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
 });
-const url = `${import.meta.env.VITE_TRACKKARO_BASE_URL}/user/register`;
 
-function SignUp() {
+function SignIn() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const { value, setTrue, setFalse } = useBoolean(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: "",
       password: "",
     },
   });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     setTrue();
     makeRequest
-      .post(url, values)
+      .post("/user/login", values)
       .then(function (response) {
-        if (response.status === 201) {
-          toast.success(
-            "Account created successfully! Please login to continue."
-          );
+        setIsAuthenticated(true);
+        if (response.status === 200) {
+          login(response.data);
+          toast.success("Logged in successfully!");
         }
-        navigate({
-          to: '/sign-in',
-        })
+        setTimeout(() => {
+          navigate({
+            to: "/dashboard",
+          });
+        }, 2000);
         setFalse();
       })
       .catch(function (error) {
-          toast.error(error.message)
+        toast.error(error.message);
         setFalse();
       });
   }
@@ -72,7 +75,7 @@ function SignUp() {
         <div className="text-center">
           <div className="flex items-center justify-center gap-x-4">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
-              Create an account
+              Login to your account
             </h1>
             <img
               src="/logo-light.webp"
@@ -81,12 +84,12 @@ function SignUp() {
             />
           </div>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Already have an account?
+            Don't have an account?{" "}
             <Link
               className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-500 dark:hover:text-indigo-400 ml-2"
-              to="/sign-in"
+              to="/sign-up"
             >
-              Sign in
+              Sign up
             </Link>
           </p>
         </div>
@@ -100,19 +103,6 @@ function SignUp() {
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input placeholder="Choose a Username" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter Your Email!" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -135,17 +125,15 @@ function SignUp() {
                 </FormItem>
               )}
             />
-
-            <Button className="w-full" type="submit">
-              {value ? (
-                <Loading text={"Creating Account..."} />
-              ) : (
-                "Create Account"
-              )}
+            <Button
+              className={`w-full ${value ? "pointer-events-none opacity-50" : null}`}
+              type="submit"
+            >
+              {value ? <Loading text={"Signing in..."} /> : "Sign In"}
             </Button>
           </form>
         </Form>
       </div>
     </main>
-  )
+  );
 }

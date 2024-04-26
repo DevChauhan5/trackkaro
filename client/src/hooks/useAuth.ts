@@ -1,20 +1,14 @@
-import { useState } from "react";
+import AuthContext from "@/context/authContext";
+import { useContext } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 const key = "authenticatedUser";
 
 const useAuth = () => {
   const [user, setUser] = useLocalStorage(key, null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const register = (user: any) => {
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const login = (user: any) => {
     setUser(user);
-    setIsAuthenticated(true);
-  };
-
-  const getUser = () => {
-    if(user){
-      return user;
-    }
   };
 
   const logout = () => {
@@ -22,7 +16,7 @@ const useAuth = () => {
     setIsAuthenticated(false);
   };
 
-  return { register, getUser, logout, isAuthenticated };
+  return { login, user, logout };
 };
 
 export default useAuth;
