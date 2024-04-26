@@ -11,8 +11,8 @@ export const Route = createFileRoute("/_protected/_dashboardlayout/dashboard")({
 
 function DashboardComponent() {
   return (
-    <div className="w-full ">
-      <DashboardNav />
+    <div className="w-full h-[89vh] overflow-y-scroll no-scrollbar">
+      
 
       {/* main container */}
       <div className="py-4 px-5">

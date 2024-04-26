@@ -6,7 +6,7 @@ import { sidebarItems } from "@/constants/index";
 const DashboardSidebar = () => {
   const { theme } = useTheme();
   return (
-    <aside className="relative overflow-hidden hidden lg:flex min-h-screen w-1/6 border-r p-4 flex-col items-start">
+    <aside className="relative overflow-hidden hidden lg:flex h-screen w-1/6 border-r p-4 flex-col items-start">
       {/* logo */}
       <img
         className="max-h-16"
