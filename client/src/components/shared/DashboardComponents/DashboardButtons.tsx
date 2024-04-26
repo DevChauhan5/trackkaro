@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon, WalletMinimal } from "lucide-react";
 import { Button } from "../../ui/button";
 import { makeRequest } from "@/lib/axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +17,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const DashboardButtons = () => {
+  const queryclient = useQueryClient();
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
@@ -33,6 +34,7 @@ const DashboardButtons = () => {
       setDescription("");
       setAmount("");
       setCategory("");
+      queryclient.invalidateQueries({ queryKey: ["total-expense"] })
       setExpenseBoxOpenn(false);
       toast.success("Expense added successfully");
     },
@@ -40,9 +42,6 @@ const DashboardButtons = () => {
       toast.error("Error adding expense");
     },
   });
-  console.log(description, amount, category);
-  console.log(mutation);
-
   return (
     <div className="mt-6 h-fit border flex items-center justify-center w-full py-10 rounded-md space-x-8">
       <Dialog open={expenseBoxOpen} onOpenChange={setExpenseBoxOpenn}>
