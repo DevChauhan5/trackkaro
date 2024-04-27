@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import DashboardButtons from "@/components/shared/DashboardComponents/DashboardButtons";
 import DashboardCards from "@/components/shared/DashboardComponents/DashboardCards";
-import TransactionHistoryBox from "@/components/shared/TransactionHistoryBox";
+import TransactionHistoryBox from "@/components/shared/DashboardComponents/TransactionHistoryBox";
 import DataOverviewChart from "@/components/shared/DashboardComponents/DataOverviewChart";
 import useAuth from "@/hooks/useAuth";
 

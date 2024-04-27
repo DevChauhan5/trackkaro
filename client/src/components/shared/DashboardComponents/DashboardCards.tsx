@@ -46,7 +46,7 @@ const DashboardCards = () => {
           <ArrowDownIcon className="w-8 h-8 p-2 rounded-full bg-red-500" />
         </span>
         <div className="text-2xl font-bold mt-6">
-          ₹{" "}
+          ₹
           {isPending ? (
             <p className="text-green-400">getting expense...</p>
           ) : (

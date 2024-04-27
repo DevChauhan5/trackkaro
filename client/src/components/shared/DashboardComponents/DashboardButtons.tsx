@@ -35,7 +35,7 @@ const DashboardButtons = () => {
       setAmount("");
       setCategory("");
       queryclient.invalidateQueries({
-        queryKey: ["total-expense", "list-expense"],
+        queryKey: ["total-expense", "list-expense", "list-recent-expense"],
       });
       setExpenseBoxOpenn(false);
       toast.success("Expense added successfully");
