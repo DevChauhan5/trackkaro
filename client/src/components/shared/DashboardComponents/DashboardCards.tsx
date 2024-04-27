@@ -14,7 +14,6 @@ const DashboardCards = () => {
   });
   const amount = data?.map((item: any) => parseInt(item.amount));
   const totalExpense = amount?.reduce((a: any, b: any) => a + b, 0);
-  console.log(data, amount, totalExpense);
   return (
     <div className="mt-2 flex flex-col lg:flex-row items-center justify-between w-full py-10 gap-8">
       {/* cards here */}
