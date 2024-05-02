@@ -1,4 +1,3 @@
-import { fetExpenseList } from "@/api/expenseRequest";
 import { makeRequest } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowDownIcon, LocateFixedIcon } from "lucide-react";
@@ -8,16 +7,13 @@ const DashboardCards = () => {
     queryKey: ["total-expense"],
     queryFn: async () => {
       try {
-        const res = await makeRequest.get("expense/list-expenses");
+        const res = await makeRequest.get("expense/total-expenses");
         return res.data;
       } catch (err) {
         return err;
       }
     },
   });
-
-  const amount = data?.map((item: any) => parseInt(item.amount));
-  const totalExpense = amount?.reduce((a: any, b: any) => a + b, 0);
   return (
     <div className="mt-2 flex flex-col lg:flex-row items-center justify-around w-full py-10 gap-8">
       {/* cards here */}
@@ -39,7 +35,7 @@ const DashboardCards = () => {
           {isPending ? (
             <p className="text-green-400">getting expense...</p>
           ) : (
-            totalExpense
+            data
           )}
         </div>
         <div className="text-md text-gray-400 mt-2">Expense</div>
