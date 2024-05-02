@@ -18,7 +18,6 @@ import { Route as AuthSignlayoutImport } from './routes/_auth/_signlayout'
 import { Route as ProtectedDashboardlayoutTransactionsImport } from './routes/_protected/_dashboardlayout.transactions'
 import { Route as ProtectedDashboardlayoutSettingsImport } from './routes/_protected/_dashboardlayout.settings'
 import { Route as ProtectedDashboardlayoutDashboardImport } from './routes/_protected/_dashboardlayout.dashboard'
-import { Route as ProtectedDashboardlayoutBudgetImport } from './routes/_protected/_dashboardlayout.budget'
 import { Route as ProtectedDashboardlayoutAnalyticsImport } from './routes/_protected/_dashboardlayout.analytics'
 import { Route as AuthSignlayoutSignUpImport } from './routes/_auth/_signlayout.sign-up'
 import { Route as AuthSignlayoutSignInImport } from './routes/_auth/_signlayout.sign-in'
@@ -59,12 +58,6 @@ const ProtectedDashboardlayoutSettingsRoute =
 const ProtectedDashboardlayoutDashboardRoute =
   ProtectedDashboardlayoutDashboardImport.update({
     path: '/dashboard',
-    getParentRoute: () => ProtectedDashboardlayoutRoute,
-  } as any)
-
-const ProtectedDashboardlayoutBudgetRoute =
-  ProtectedDashboardlayoutBudgetImport.update({
-    path: '/budget',
     getParentRoute: () => ProtectedDashboardlayoutRoute,
   } as any)
 
@@ -112,10 +105,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProtectedDashboardlayoutAnalyticsImport
       parentRoute: typeof ProtectedDashboardlayoutImport
     }
-    '/_protected/_dashboardlayout/budget': {
-      preLoaderRoute: typeof ProtectedDashboardlayoutBudgetImport
-      parentRoute: typeof ProtectedDashboardlayoutImport
-    }
     '/_protected/_dashboardlayout/dashboard': {
       preLoaderRoute: typeof ProtectedDashboardlayoutDashboardImport
       parentRoute: typeof ProtectedDashboardlayoutImport
@@ -141,7 +130,6 @@ export const routeTree = rootRoute.addChildren([
   ]),
   ProtectedDashboardlayoutRoute.addChildren([
     ProtectedDashboardlayoutAnalyticsRoute,
-    ProtectedDashboardlayoutBudgetRoute,
     ProtectedDashboardlayoutDashboardRoute,
     ProtectedDashboardlayoutSettingsRoute,
     ProtectedDashboardlayoutTransactionsRoute,

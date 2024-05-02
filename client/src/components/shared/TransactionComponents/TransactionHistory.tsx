@@ -1,19 +1,27 @@
 import { fetExpenseList } from "@/api/expenseRequest";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import formatDate from "@/lib/formatDate";
 import { useQuery } from "@tanstack/react-query";
-
-
+import { EllipsisVerticalIcon } from "lucide-react";
+import UpdateExpenses from "./UpdateExpenses";
+import { DeleteExpenses } from "./DeleteExpenses";
 
 export const TransactionHistory = () => {
   const { isPending, data } = useQuery({
@@ -37,18 +45,24 @@ export const TransactionHistory = () => {
               <TableHead>Title</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead className="text-right">Amount</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead className="text-right">Update</TableHead>
+              <TableHead className="text-right">Delete</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.map((transaction, index) => (
-              <TableRow key={index}>
+            {data?.map((transaction: any, index: number) => (
+              <TableRow key={index} className="">
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>{transaction.description}</TableCell>
                 <TableCell>{transaction.category}</TableCell>
                 <TableCell>{formatDate(transaction.updatedAt)}</TableCell>
+                <TableCell>{transaction.amount}</TableCell>
                 <TableCell className="text-right">
-                  {transaction.amount}
+                  <UpdateExpenses transaction={transaction} />
+                </TableCell>
+                <TableCell className="text-right">
+                  <DeleteExpenses transaction={transaction} />
                 </TableCell>
               </TableRow>
             ))}

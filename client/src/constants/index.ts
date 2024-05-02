@@ -19,11 +19,6 @@ export const sidebarItems = [
     text: "Transactions",
   },
   {
-    to: "/budget",
-    icon: WalletIcon,
-    text: "Budget",
-  },
-  {
     to: "/analytics",
     icon: AreaChartIcon,
     text: "Analytics",
