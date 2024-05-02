@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const makeRequest = axios.create({
-  baseURL: `${import.meta.env.VITE_TRACKKARO_BASE_URL}`,
+  baseURL: `/api/v1`,
   withCredentials: true,
 })
 

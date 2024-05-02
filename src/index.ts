@@ -6,12 +6,8 @@ import authMiddleware from "../middlewares/authMiddleware";
 import budget from "./budget/budgetRoutes";
 import expenseAnalytics from "./expense-analytics/expenseAnalyticsRoutes";
 
-const app = new Hono().basePath("/api/v1");
+const app = new Hono().basePath("/v1");
 
-app.use('/*', cors({
-  origin: 'https://solid-space-journey-pv5797r4g7vf75p4-5173.app.github.dev',
-  credentials: true,
-}))
 app.use("/expense/*", authMiddleware);
 app.use("/budget/*", authMiddleware);
 app.use("/expense-analytics/*", authMiddleware);
@@ -25,7 +21,7 @@ app.route("/budget", budget);
 app.route("/expense-analytics", expenseAnalytics);
 
 if (process.env.NODE_ENV === "development") {
-  console.log(`Server is running at http://localhost:3000`);
+  console.log(`Server is running at 3000 in dev mode.`);
 }
 
 export default app;

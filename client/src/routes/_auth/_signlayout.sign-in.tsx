@@ -52,6 +52,7 @@ function SignIn() {
     makeRequest
       .post("/user/login", values)
       .then(function (response) {
+        console.log(response);
         setIsAuthenticated(true);
         if (response.status === 200) {
           login(response.data);
@@ -65,6 +66,7 @@ function SignIn() {
         setFalse();
       })
       .catch(function (error) {
+        console.log(error)
         toast.error(error.message);
         setFalse();
       });

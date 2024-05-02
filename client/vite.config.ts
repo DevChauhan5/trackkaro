@@ -10,4 +10,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://solid-space-journey-pv5797r4g7vf75p4-3000.app.github.dev/api",
+        changeOrigin: true,
+      },
+    },
+  }
 });
