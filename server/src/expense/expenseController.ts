@@ -89,3 +89,19 @@ export const getExpenseController = async (c: Context) => {
     return c.json({ message: "Internal Server Error" }, 500);
   }
 };
+
+// Get Total Expense Controller
+export const getTotalExpenseController = async (c: Context) => {
+  try {
+    const user = await getUserByToken(c);
+    const allExpenses = await db
+      .select()
+      .from(expenses)
+      .where(eq(expenses.userId, user.id));
+    const amount = allExpenses.map((item) => parseInt(item.amount));
+    const totalExpense = amount.reduce((a, b) => a + b, 0);
+    return c.json(totalExpense, 200);
+  } catch (error) {
+    return c.json({ message: "Internal Server Error" }, 500);
+  }
+};
